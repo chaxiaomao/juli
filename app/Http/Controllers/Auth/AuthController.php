@@ -61,4 +61,18 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function getRegister()
+    {
+        return view("home.register");
+    }
+
+    public function postRegister(UserRegisterRequest $req){
+        //验证通过 注册用户
+        $data = $req->all();
+        $data['register_ip'] = $req->ip();
+
+        $user =  $this->registrar->create($data);
+        return redirect()->intended('/');
+    }
 }

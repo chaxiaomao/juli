@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::controller('user', 'View\Home\UserController');
+//Route::controllers(['auth' => 'Auth\AuthControlle',]);
+
+Route::group(['prefix' => 'service', 'namespace' => 'Services'], function() {
+    Route::get('validate_code/create', 'ValidateCodeController@create');
+    Route::post('post_register', 'UserController@postRegister');
+});
