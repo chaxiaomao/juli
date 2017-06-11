@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Route::controller('user', 'View\Home\UserController');
+Route::controller('home', 'View\Home\indexController');
+
 //Route::controllers(['auth' => 'Auth\AuthControlle',]);
 
 Route::group(['prefix' => 'service', 'namespace' => 'Services'], function() {
