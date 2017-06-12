@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\View\Home;
 
 use App\Http\Controllers\Controller;
 
@@ -9,9 +9,8 @@ class indexController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function getIndex()
     {
-        echo url('/home');
-        echo '这是首页';
+        return view('home.index');
     }
 }

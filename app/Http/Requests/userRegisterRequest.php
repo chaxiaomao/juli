@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Config;
+use App\Http\Requests\Request;
 
-class UserRegisterRequest extends Request
+class userRegisterRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,11 +28,8 @@ class UserRegisterRequest extends Request
         //$regex = Config::get('constant.phone_number_regex');
         return [
             //对注册表单提交的信息进行验证
-            "username" => ['required','min:3','max:16','unique:users'],
-            "phone_number" => ['required','min:3','max:16','unique:users'],
+            "phone" => ['required','min:3','max:16','unique:users'],
             "password" => ['required','min:6','max:16','confirmed'],
-            "verify_code" => ['required','digits:4'],
-
         ];
     }
 

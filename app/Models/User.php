@@ -3,11 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class User extends Model
 {
-    protected $table = 'users';
+    protected $table = 'user';
     protected $primaryKey = 'id';
     public $timestamps = true;
+    protected $fillable = ['username', 'ip'];
 
     public static $rules = array(
         'phone' => 'required|min:11|unique:users',

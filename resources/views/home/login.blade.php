@@ -1,16 +1,16 @@
 @extends('home.base')
 
-@section('title', "注册")
+@section('title', "登录")
 <link rel="stylesheet" href="/fonts/Elephant.ttf">
 @section('content')
-    <form id="form" action="/user/register" method="post">
+    <form id="form" action="/user/login" method="post">
         {{ csrf_field() }}
-        <div class="weui_cells_title">手机 - 注册</div>
+        <div class="weui_cells_title">手机 - 登陆</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input name="phone" class="weui_input" type="tel" required pattern="[0-9]{11}" maxlength="11" placeholder="输入你手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
+                    <input name="phone" class="weui_input" type="tel" required pattern="[0-9]{11}" maxlength="11" placeholder="输入你的手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
                 </div>
                 <div class="weui_cell_ft">
                     <i class="weui_icon_warn"></i>
@@ -19,16 +19,7 @@
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input name="password" class="weui_input" type="password" maxlength="64" placeholder="输入你的密码" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
-                </div>
-                <div class="weui_cell_ft">
-                    <i class="weui_icon_warn"></i>
-                </div>
-            </div>
-            <div class="weui_cell">
-                <div class="weui_cell_hd"><label class="weui_label">确认密码</label></div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input name="password_confirmation" class="weui_input" type="password" maxlength="64" placeholder="输确认密码" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
+                    <input name="password" class="weui_input" type="password" maxlength="11" placeholder="输入你的密码" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
                 </div>
                 <div class="weui_cell_ft">
                     <i class="weui_icon_warn"></i>
@@ -45,13 +36,12 @@
             </div>
         </div>
         <div class="weui_btn_area weui_btn_area_inline">
-            {{--<button type="button" class="weui_btn weui_btn_primary" onclick="post_register()">注册</button>--}}
-            <button type="submit" class="weui_btn weui_btn_primary">注册</button>
+            <button type="submit" class="weui_btn weui_btn_primary">登陆</button>
             {{--<a href="javascript:;" class="weui_btn weui_btn_primary">按钮</a>--}}
-            <a href="/user/login" style="line-height: 42px;">已有账号，马上登录</a>
+            <a href="/user/register" style="line-height: 42px;">没有账号?马上注册</a>
         </div>
     </form>
-    @endsection
+@endsection
 
 @section('m-js')
     <script type="text/javascript">
@@ -86,4 +76,4 @@
             })
         }
     </script>
-    @endsection
+@endsection
