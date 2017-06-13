@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="/style/weui3.css"/>
     <link rel="stylesheet" href="/style/juli.css"/>
 </head>
-@yield('m-style')
+@yield('m-css')
 <body>
 <!-- tooltips -->
 <div class="juli_toptips"><span></span></div>
 @extends('compoent.loading')
 @yield('content')
 </body>
-<script src="/js/jquery-1.11.2.min.js"></script>
+
 @yield('m-js')
 </html>

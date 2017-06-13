@@ -22,9 +22,9 @@ Route::group(['prefix' => 'service', 'namespace' => 'Services'], function() {
     Route::post('post_register', 'UserController@postRegister');
 });
 
-Route::group(['namespace' => 'View'], function () {
+Route::group(['middleware' => 'auth'], function () {
 
-    Route::group(['namespace' => 'Home'], function () {
+    Route::group(['namespace' => 'View\Home'], function () {
         Route::controller('home', 'indexController');
     });
 
