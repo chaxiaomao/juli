@@ -9,47 +9,27 @@
 
 @section('content')
     <div class="weui_cells_title">购物车</div>
+    <form action="/home/">
+
+    </form>
     <div class="weui_cells weui_cells_checkbox">
-        <label class="weui_cell weui_check_label" for="s11">
-            <div class="weui_cell_hd">
-                <input type="checkbox" class="weui_check" name="checkbox1" id="s11" checked="checked">
-                <i class="weui_icon_checked"></i>
-            </div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>美国</p>
-            </div>
-        </label>
-        <label class="weui_cell weui_check_label" for="s12">
-            <div class="weui_cell_hd">
-                <input type="checkbox" name="checkbox1" class="weui_check" id="s12">
-                <i class="weui_icon_checked"></i>
-            </div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>英国</p>
-            </div>
-        </label>
-        <label class="weui_cell weui_check_label" for="s13">
-            <div class="weui_cell_hd">
-                <input type="checkbox" name="checkbox1" class="weui_check" id="s13">
-                <i class="weui_icon_checked"></i>
-            </div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>法国</p>
-            </div>
-        </label>
-        <label class="weui_cell weui_check_label" for="s14">
-            <div class="weui_cell_hd">
-                <input type="checkbox" name="checkbox1" class="weui_check" id="s14">
-                <i class="weui_icon_checked"></i>
-            </div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>德国</p>
-                <img src="" />
-            </div>
-        </label>
+        @foreach($cart_items as $cart_item)
+            <label class="weui_cell weui_check_label" for="{{ $cart_item['id'] }}">
+                <div class="weui_cell_hd">
+                    <input type="checkbox" name="product" value="{{ $cart_item['id'] }}" class="weui_check" id="{{ $cart_item['id'] }}">
+                    <i class="weui_icon_checked"></i>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>商品名称：{{ $cart_item['name'] }}</p>
+                    <p>商品价格：{{ $cart_item['price'] }}</p>
+                    <p>商品数量：{{ $cart_item['quantity'] }}</p>
+                    <img src="{{ $cart_item['attributes']['preview'] }}" />
+                </div>
+            </label>
+            @endforeach
     </div>
     <div id="fix-btn">
-        <a href="/home/">删除商品</a>|
+        <a href="javascript:;" onclick="">删除商品</a>|
         <a href="/home/ordsn">立即购买</a>
     </div>
     @endsection

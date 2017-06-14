@@ -23,43 +23,33 @@
     <div id="container">
         <div id="left">
             <ul>
-                <li id="li_1">产品系列</li>
-                <li id="li_2" class="active">产品系列</li>
-                <li id="li_3">产品系列</li>
-                <li id="li_4">产品系列</li>
-                <li id="li_5">产品系列</li>
-                <li id="li_6">产品系列</li>
+                @foreach($categorys as $category)
+                <li id="li_{{ $category->id }}">{{ $category->name }}</li>
+                {{--<li id="li_2">产品系列</li>--}}
+                {{--<li id="li_3">产品系列</li>--}}
+                {{--<li id="li_4">产品系列</li>--}}
+                {{--<li id="li_5">产品系列</li>--}}
+                {{--<li id="li_6">产品系列</li>--}}
+                    @endforeach
             </ul>
         </div>
         <div id="right">
             <ul>
+                @foreach($products as $product)
                 <li>
-                    <img src="" />
-                    <span>CBT125大</span><br>
-                    <span class="pdt_price">58元</span>
-                    <img class="inp" src="/images/choose.png" onclick="chooseItem(this, 1)"/>
-                    <input id="1" name="product" value="" type="checkbox" />
+                    <img id="preview_{{ $product->id }}" src="{{ $product->preview }}" />
+                    <span id="name_{{ $product->id }}">{{ $product->name }}</span><br>
+                    <span id="price_{{ $product->id }}" class="pdt_price">{{ $product->price }}</span>
+                    <img class="inp" src="/images/choose.png" onclick="chooseItem(this, '{{ $product->id }}')"/>
+                    <input id="{{ $product->id }}" name="product" value="{{ $product->id }}" type="checkbox" />
                 </li>
-                <li>
-                    <img src="" />
-                    <span>CBT125大</span><br>
-                    <span class="pdt_price">58元</span>
-                    <img class="inp" src="/images/choose.png" onclick="chooseItem(this, 2)"/>
-                    <input id="2" name="product" value="" type="checkbox" />
-                </li>
-                <li>
-                    <img src="" />
-                    <span>CBT125大</span><br>
-                    <span class="pdt_price">58元</span>
-                    <img class="inp" src="/images/choose.png" onclick="chooseItem(this, 2)"/>
-                    <input id="2" name="product" value="" type="checkbox" />
-                </li>
+                    @endforeach
             </ul>
         </div>
     </div>
     <div id="fix-btn">
-        <a href="/home/shoppingcar">加入购物车</a>|
-        <a href="/home/ordsn">立即购买</a>
+        <a href="javascript:;" onclick="addToCart()">加入购物车</a>|
+        <a href="/home/shoppingcar">前往结算</a>
     </div>
     @endsection
 
@@ -73,46 +63,16 @@
             var r = window.innerWidth - l + "px";//右边宽度像素
             $("#left").attr("style", "width:" + w);
             $("#right").attr("style", "width:" + r);
-            //li样式
-            {{--switch ({!! $active !!}) {--}}
-                {{--case 1:--}}
-                    {{--$("#li_1").addClass("active");--}}
-                    {{--break;--}}
-                {{--case 2:--}}
-                    {{--$("#li_2").addClass("active");--}}
-                    {{--break;--}}
-                {{--case 3:--}}
-                    {{--$("#li_3").addClass("active");--}}
-                    {{--break;--}}
-                {{--case 4:--}}
-                    {{--$("#li_4").addClass("active");--}}
-                    {{--break;--}}
-                {{--default:--}}
-                    {{--$("#li_0").addClass("active");--}}
-            {{--}--}}
+            $("#li_{{ $active }}").addClass("active");
             //绑定li
-            for (var i = 0; i <= 6; i++) {
+            for (var i = 0; i <= "{{ count($categorys) }}"; i++) {
                 $("#li_" + i).bind("click", {index: i}, clickHandler);
             }
             function clickHandler(event) {
                 var i = event.data.index;
                 $(".active").removeClass("active");
                 $("#li_" + i).addClass("active");
-                switch (i) {
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        break;
-                    case 3:
-
-                        break;
-                    case 4:
-                        break;
-                    default:
-
-                }
+                location.replace('/home/index?cid=' + i);
             }
         });
 
@@ -124,6 +84,42 @@
             }
             $("#" + id).attr("checked", true);
             $(obj).attr("src", "/images/chosen.png");
+        }
+        
+        function addToCart() {
+            var arr = [];
+            var i = 0;
+            $("input[name=product]:checked").each(function () {
+                var id = $(this).val();
+                arr[i] = new Array(id, $("#name_" + id).html(), $("#price_" + id).html(), $("#preview_" + id)[0].src);
+                i++;
+            });
+//            console.log(arr);
+            $.ajax({
+                url: "/service/cart/add_product",
+                data: {data: arr},
+                type: "get",
+                dataType: "json",
+                timeout: 3000,
+                success: function (result,status,xhr) {
+                    if (result.status == null) {
+                        $(".juli_toptips span").html("服务器错误");
+                        setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                    }
+                    if (result.status == 1) {
+                        $(".juli_toptips span").html(result.message);
+                        setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                    }
+                    $(".juli_toptips span").html(result.message);
+                    setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                    i = 0;
+                },
+                error: function (xhr,status,error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
         }
     </script>
     @endsection

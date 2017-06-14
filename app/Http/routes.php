@@ -19,7 +19,7 @@ Route::controllers(['user' => 'Auth\AuthController']);
 
 Route::group(['prefix' => 'service', 'namespace' => 'Services'], function() {
     Route::get('validate_code/create', 'ValidateCodeController@create');
-    Route::post('post_register', 'UserController@postRegister');
+    Route::get('cart/add_product', 'CartController@productAdd');
 });
 
 Route::group(['middleware' => 'auth'], function () {

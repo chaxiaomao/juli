@@ -65,7 +65,6 @@
                 success: function (data) {
                     $(".juli_toptips span").html(data);
                     setTimeout(function() {$(".juli_toptips").hide();}, 2000);
-                    console.log(data);
                 },
                 error: function () {
 

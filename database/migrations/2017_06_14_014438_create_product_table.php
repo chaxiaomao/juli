@@ -12,13 +12,14 @@ class CreateProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_content', function($table){
+        Schema::create('product', function($table){
             $table->increments('id');
             $table->string('name', 50);
             $table->string('summary', 50);
             $table->string('preview', 200);
             $table->decimal('price', 10 ,2);
             $table->integer('parent_id');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }
