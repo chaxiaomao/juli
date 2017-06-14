@@ -85,16 +85,21 @@
             $("#" + id).attr("checked", true);
             $(obj).attr("src", "/images/chosen.png");
         }
-        
+
         function addToCart() {
-            var arr = [];
-            var i = 0;
+            if ($("input[name=product]:checked").length == 0) {
+                $(".juli_toptips").show();
+                $(".juli_toptips span").html("请先选择商品");
+                setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                return;
+            }
+
+            var arr = new Array();
             $("input[name=product]:checked").each(function () {
                 var id = $(this).val();
-                arr[i] = new Array(id, $("#name_" + id).html(), $("#price_" + id).html(), $("#preview_" + id)[0].src);
-                i++;
+                arr.push(new Array(id, $("#name_" + id).html(), $("#price_" + id).html(), $("#preview_" + id)[0].src));
             });
-//            console.log(arr);
+            console.log(arr);
             $.ajax({
                 url: "/service/cart/add_product",
                 data: {data: arr},
@@ -103,16 +108,20 @@
                 timeout: 3000,
                 success: function (result,status,xhr) {
                     if (result.status == null) {
+                        $(".juli_toptips").show();
                         $(".juli_toptips span").html("服务器错误");
                         setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                        return;
                     }
                     if (result.status == 1) {
+                        $(".juli_toptips").show();
                         $(".juli_toptips span").html(result.message);
                         setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                        return;
                     }
+                    $(".juli_toptips").show();
                     $(".juli_toptips span").html(result.message);
                     setTimeout(function() {$(".juli_toptips").hide();}, 2000);
-                    i = 0;
                 },
                 error: function (xhr,status,error) {
                     console.log(xhr);
