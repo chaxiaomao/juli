@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
+use App\Models\User;
+use App\Tool\userForm;
+//use Validator;
+use Illuminate\Http\Request;
+//use App\Http\Requests\userLoginRequest;
+//use App\Http\Requests\userRegisterRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -67,12 +71,73 @@ class AuthController extends Controller
         return view("home.register");
     }
 
-    public function postRegister(UserRegisterRequest $req){
-        //验证通过 注册用户
-        $data = $req->all();
-        $data['register_ip'] = $req->ip();
+    public function getLogin(Request $request)
+    {
+        return view('home.login');
+    }
 
-        $user =  $this->registrar->create($data);
-        return redirect()->intended('/');
+    public function postRegister(Request $request){
+        //验证通过 注册用户
+        $data = $request->all();
+        if ($data['validate_code'] != session()->get('validate_code')) {
+            echo '<script>alert("验证码错误");history.go(-1);</script>';
+            exit;
+        }
+        $user_form = new userForm($data['phone'], $data['password'], $data['password_confirmation']);
+        $result = $user_form->check();//格式验证
+        if ($result->status == 1) {
+            echo '<script>alert("'. $result->message . '");history.go(-1)</script>';
+            exit;
+        }
+        if ($result->status == 0) {
+            if (User::where('phone', $data['phone'])->first()) {
+                echo '<script>alert("手机已被注册");history.go(-1);</script>';
+                exit;
+            }
+            $user =  new User();
+            $user->phone = $data['phone'];
+            $user->password = md5('juli' . $data['password']);
+            $user->ip = $request->ip();
+            $user->save();
+            return redirect('/home/index');
+        }
+
+    }
+
+    public function postLogin(Request $request)
+    {
+        if(session()->get('user')) {
+            return '<script>alert("你已经登录");location.href = "/home/index";</script>';
+        }
+        //验证通过 登陆用户
+        $data = $request->all();
+        if ($data['validate_code'] != session()->get('validate_code')) {
+            echo '<script>alert("验证码错误");history.go(-1);</script>';
+            exit;
+        }
+        $user_form = new userForm($data['phone'], $data['password'], $data['password']);
+        $result = $user_form->check();//格式验证
+        if ($result->status == 1) {
+            echo '<script>alert("'. $result->message . '");history.go(-1);</script>';
+            exit;
+        }
+        if ($result->status == 0) {
+            $user = User::where('phone', $data['phone'])->first();
+            if ($user) {
+                if ($user->password != md5('juli' . $data['password'])) {
+                    echo '<script>alert("密码不正确");history.go(-1);</script>';
+                    exit;
+                }
+                $user->update([
+                    'ip' => $request->ip(),
+                ]);
+                session()->put('user', $user->phone);
+                return redirect('/home/index');
+            } else {
+                echo '<script>alert("账号不存在");history.go(-1);</script>';
+                exit;
+            }
+        }
+
     }
 }

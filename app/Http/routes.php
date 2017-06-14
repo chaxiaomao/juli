@@ -15,12 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controller('user', 'View\Home\UserController');
-Route::controller('home', 'View\Home\indexController');
-
-//Route::controllers(['auth' => 'Auth\AuthControlle',]);
+Route::controllers(['user' => 'Auth\AuthController']);
 
 Route::group(['prefix' => 'service', 'namespace' => 'Services'], function() {
     Route::get('validate_code/create', 'ValidateCodeController@create');
-    Route::post('post_register', 'UserController@postRegister');
+    Route::controllers(['cart' => 'CartController']);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['namespace' => 'View\Home'], function () {
+        Route::controller('home', 'indexController');
+    });
+
 });

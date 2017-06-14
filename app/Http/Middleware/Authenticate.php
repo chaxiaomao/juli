@@ -34,12 +34,16 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('auth/login');
-            }
+//        if ($this->auth->guest()) {
+//            if ($request->ajax()) {
+//                return response('Unauthorized.', 401);
+//            } else {
+//                return redirect()->guest('user/login');
+//            }
+//        }
+        if (!$request->session()->get('user')) {
+//            return redirect()->guest('user/login');
+            return '<script>alert("登录过期，请从新登录");location.href = "/user/login";</script>';
         }
 
         return $next($request);

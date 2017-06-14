@@ -1,6 +1,6 @@
 <?php
 
-use App\Tools;
+namespace App\Tool;
 
 class dataPusher
 {
