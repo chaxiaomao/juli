@@ -19,7 +19,7 @@ class CreateOrderTable extends Migration
             $table->string('tel', 11);
             $table->string('city', 20);
             $table->string('location', 50);
-            $table->string('fast_shot', 2000);
+            $table->string('fast_shot', 20000);
             $table->timestamps();
         });
     }

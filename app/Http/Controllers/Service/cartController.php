@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Services;
+namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Cart;
 use App\Tool\dataPusher;
 
-class CartController extends Controller
+class cartController extends Controller
 {
     public function getAdd(Request $request)
     {

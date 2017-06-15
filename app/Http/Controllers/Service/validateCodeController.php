@@ -1,12 +1,12 @@
 <?php
-namespace App\Http\Controllers\Services;
+namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Tool\ValidateCode;
 use App\Tool\dataPusher;
 
-class ValidateCodeController extends Controller
+class validateCodeController extends Controller
 {
     public function create(Request $request)
     {

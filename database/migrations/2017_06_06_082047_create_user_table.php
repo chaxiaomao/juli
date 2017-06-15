@@ -18,7 +18,7 @@ class CreateUserTable extends Migration
             $table->string('avatar');
 //            $table->string('email', 100)->unique();
             $table->string('phone',11);
-            $table->string('password', 64);
+            $table->string('password');
             $table->string('ip');
             $table->integer('agent_id');
             $table->timestamps();

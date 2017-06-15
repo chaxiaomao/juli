@@ -41,7 +41,7 @@ class Authenticate
 //                return redirect()->guest('user/login');
 //            }
 //        }
-        if (!$request->session()->get('user')) {
+        if (!$request->session()->get('user.user_id')) {
 //            return redirect()->guest('user/login');
             return '<script>alert("登录过期，请从新登录");location.href = "/user/login";</script>';
         }

@@ -5,25 +5,27 @@
     <div class="weui-form-preview">
         <div class="weui-form-preview-hd">
             <label class="weui-form-preview-label">付款金额</label>
-            <em class="weui-form-preview-value">¥2400.00</em>
+            <em class="weui-form-preview-value">¥{{ $total }}</em>
         </div>
-        <div class="weui-form-preview-bd">
-            <p>
-                <label class="weui-form-preview-label">商品</label>
-                <span class="weui-form-preview-value">电动打蛋机</span>
-            </p>
-            <p>
-                <label class="weui-form-preview-label">标题标题</label>
-                <span class="weui-form-preview-value">名字名字名字</span>
-            </p>
-            <p>
-                <label class="weui-form-preview-label">标题标题</label>
-                <span class="weui-form-preview-value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
-            </p>
-        </div>
+        @foreach($items as $item)
+            <div class="weui-form-preview-bd">
+                <p>
+                    <label class="weui-form-preview-label">商品名字</label>
+                    <span class="weui-form-preview-value">{{ $item->name }}</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview-label">价格</label>
+                    <span class="weui-form-preview-value">{{ $item->price }}</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview-label">数量</label>
+                    <span class="weui-form-preview-value">{{ $item->quantity }}</span>
+                </p>
+            </div>
+        @endforeach
         <div class="weui-form-preview-ft">
             <a class="weui-form-preview-btn weui-form-preview-btn-default" href="javascript:history.go(-1)">返回上一页</a>
             <button class="weui-form-preview-btn weui-form-preview-btn-primary" href="javascript:">立即支付</button>
         </div>
     </div>
-    @endsection
+@endsection

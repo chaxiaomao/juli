@@ -97,8 +97,12 @@ class AuthController extends Controller
             $user =  new User();
             $user->phone = $data['phone'];
             $user->password = md5('juli' . $data['password']);
+            $user->username = $request->session()->get('user.wechat')['nickname'];
+            $user->avatar = $request->session()->get('user.wechat')['avatar'];
+            $user->openid = $request->session()->get('user.wechat')['id'];
             $user->ip = $request->ip();
             $user->save();
+            session()->put('user.user_id', $user->id);
             return redirect('/home/index');
         }
 
@@ -106,7 +110,7 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        if(session()->get('user')) {
+        if (session()->get('user.user_id')) {
             return '<script>alert("你已经登录");location.href = "/home/index";</script>';
         }
         //验证通过 登陆用户
@@ -131,7 +135,7 @@ class AuthController extends Controller
                 $user->update([
                     'ip' => $request->ip(),
                 ]);
-                session()->put('user', $user->phone);
+                session()->put('user.user_id', $user->id);
                 return redirect('/home/index');
             } else {
                 echo '<script>alert("账号不存在");history.go(-1);</script>';

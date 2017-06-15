@@ -15,17 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controllers(['user' => 'Auth\AuthController']);
-
-Route::group(['prefix' => 'service', 'namespace' => 'Services'], function() {
-    Route::get('validate_code/create', 'ValidateCodeController@create');
-    Route::controllers(['cart' => 'CartController']);
+Route::group(['middleware' => 'wechat.oauth'], function () {
+    Route::controllers(['user' => 'Auth\AuthController']);
+    Route::group(['middleware' => 'auth'], function () {
+        Route::group(['namespace' => 'View\Home'], function () {
+            Route::controller('home', 'indexController');
+        });
+    });
 });
 
-Route::group(['middleware' => 'auth'], function () {
 
-    Route::group(['namespace' => 'View\Home'], function () {
-        Route::controller('home', 'indexController');
-    });
-
+Route::group(['prefix' => 'service', 'namespace' => 'Service'], function() {
+    Route::get('validate_code/create', 'validateCodeController@create');
+    Route::any('wechat/callback', 'oauthController@callback');
+    Route::controllers(['cart' => 'cartController']);
+    Route::controllers(['order' => 'orderController']);
 });

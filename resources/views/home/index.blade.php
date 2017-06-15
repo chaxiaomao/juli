@@ -4,6 +4,9 @@
 
 @section('m-css')
     <style>
+        .navbar{text-align: right;height: 45px;line-height: 45px;padding-right: 20px;background-color: rgb(0, 160, 233);}
+        a, .icon{color:#FFFFFF;}
+        .icon{font-size: 25px;padding-left: 5px;}
         #container{position: absolute;height: 100%;width:100%;}
         #left{background-color: #D5D5D5;height:100%;}
         #left li{padding:15px;}
@@ -16,34 +19,37 @@
         .inp, #right li input{position: absolute;right: 10px;top:40px;width:30px;height: 30px;}
         .inp{z-index: 99;}
     </style>
-    @endsection
+@endsection
 
 @section('content')
-    {{--"{{ session()->get('user') }}"--}}
+    "{{ session()->get('user.user_id') }}"
+    <div class="navbar">
+        <a href="/home/personal">{{ session()->get('user.wechat')['nickname'] }}<i class="icon icon-85"></i></a>
+    </div>
     <div id="container">
         <div id="left">
             <ul>
                 @foreach($categorys as $category)
-                <li id="li_{{ $category->id }}">{{ $category->name }}</li>
-                {{--<li id="li_2">产品系列</li>--}}
-                {{--<li id="li_3">产品系列</li>--}}
-                {{--<li id="li_4">产品系列</li>--}}
-                {{--<li id="li_5">产品系列</li>--}}
-                {{--<li id="li_6">产品系列</li>--}}
-                    @endforeach
+                    <li id="li_{{ $category->id }}">{{ $category->name }}</li>
+                    {{--<li id="li_2">产品系列</li>--}}
+                    {{--<li id="li_3">产品系列</li>--}}
+                    {{--<li id="li_4">产品系列</li>--}}
+                    {{--<li id="li_5">产品系列</li>--}}
+                    {{--<li id="li_6">产品系列</li>--}}
+                @endforeach
             </ul>
         </div>
         <div id="right">
             <ul>
                 @foreach($products as $product)
-                <li>
-                    <img id="preview_{{ $product->id }}" src="{{ $product->preview }}" />
-                    <span id="name_{{ $product->id }}">{{ $product->name }}</span><br>
-                    <span id="price_{{ $product->id }}" class="pdt_price">{{ $product->price }}</span>
-                    <img class="inp" src="/images/choose.png" onclick="chooseItem(this, '{{ $product->id }}')"/>
-                    <input id="{{ $product->id }}" name="product" value="{{ $product->id }}" type="checkbox" />
-                </li>
-                    @endforeach
+                    <li>
+                        <img id="preview_{{ $product->id }}" src="{{ $product->preview }}"/>
+                        <span id="name_{{ $product->id }}">{{ $product->name }}</span><br>
+                        <span id="price_{{ $product->id }}" class="pdt_price">{{ $product->price }}</span>
+                        <img class="inp" src="/images/choose.png" onclick="chooseItem(this, '{{ $product->id }}')"/>
+                        <input id="{{ $product->id }}" name="product" value="{{ $product->id }}" type="checkbox"/>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -51,7 +57,7 @@
         <a href="javascript:;" onclick="productAdd()">加入购物车</a>|
         <a href="/home/shoppingcar">前往结算</a>
     </div>
-    @endsection
+@endsection
 
 @section('m-js')
     <script src="/js/jquery-1.11.2.min.js"></script>
@@ -75,9 +81,8 @@
                 location.replace('/home/index?cid=' + i);
             }
         });
-
         function chooseItem(obj, id) {
-            if($("#" + id).attr("checked")) {
+            if ($("#" + id).attr("checked")) {
                 $(obj).attr("src", "/images/choose.png");
                 $("#" + id).attr("checked", false);
                 return;
@@ -85,16 +90,16 @@
             $("#" + id).attr("checked", true);
             $(obj).attr("src", "/images/chosen.png");
         }
-
         function productAdd() {
             if ($("input[name=product]:checked").length == 0) {
                 $(".juli_toptips").show();
                 $(".juli_toptips span").html("请先选择商品");
-                setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                setTimeout(function () {
+                    $(".juli_toptips").hide();
+                }, 2000);
                 console.log($("input[name=product]:checked").length);
                 return;
             }
-
             var arr = new Array();
             $("input[name=product]:checked").each(function () {
                 var id = $(this).val();
@@ -109,24 +114,30 @@
                 dataType: "json",
                 cache: false,
                 timeout: 3000,
-                success: function (result,status,xhr) {
+                success: function (result, status, xhr) {
                     if (result.status == null) {
                         $(".juli_toptips").show();
                         $(".juli_toptips span").html("服务器错误");
-                        setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                        setTimeout(function () {
+                            $(".juli_toptips").hide();
+                        }, 2000);
                         return;
                     }
                     if (result.status == 1) {
                         $(".juli_toptips").show();
                         $(".juli_toptips span").html(result.message);
-                        setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                        setTimeout(function () {
+                            $(".juli_toptips").hide();
+                        }, 2000);
                         return;
                     }
                     $(".juli_toptips").show();
                     $(".juli_toptips span").html(result.message);
-                    setTimeout(function() {$(".juli_toptips").hide();}, 2000);
+                    setTimeout(function () {
+                        $(".juli_toptips").hide();
+                    }, 2000);
                 },
-                error: function (xhr,status,error) {
+                error: function (xhr, status, error) {
                     console.log(xhr);
                     console.log(status);
                     console.log(error);
@@ -134,4 +145,4 @@
             });
         }
     </script>
-    @endsection
+@endsection
