@@ -81,14 +81,14 @@ class indexController extends Controller
             env('MERCHANT_ID'),
             env('MERCHANT_KEY')
         );
-        $order = new Order();
-        $order->body = 'grocery business';
-        $order->out_trade_no = $ordsn;
-        $order->total_fee = $total * 100;    // 单位为 “分”, 字符串类型
-        $order->openid = $wechat_user['id'];
-        $order->notify_url = url('service/wx_notify');
-        $unifiedOrder = new UnifiedOrder($business, $order);
-        $payment = new Payment($unifiedOrder);
+//        $order = new Order();
+//        $order->body = 'grocery business';
+//        $order->out_trade_no = $ordsn;
+//        $order->total_fee = $total * 100;    // 单位为 “分”, 字符串类型
+//        $order->openid = $wechat_user['id'];
+//        $order->notify_url = url('service/wx_notify');
+//        $unifiedOrder = new UnifiedOrder($business, $order);
+//        $payment = new Payment($unifiedOrder);
         return view('home.wxpay')->with('items', $items)
             ->with('total', $total);
     }

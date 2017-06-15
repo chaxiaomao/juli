@@ -4,10 +4,12 @@
 
 @section('m-css')
     <style>
-        .navbar{text-align: right;height: 45px;line-height: 45px;padding-right: 20px;background-color: rgb(0, 160, 233);}
-        a, .icon{color:#FFFFFF;}
-        .icon{font-size: 25px;padding-left: 5px;}
-        #container{position: absolute;height: 100%;width:100%;}
+        .navbar, #container{position:fixed;}
+        .navbar{text-align: right;height: 45px;line-height: 45px;background-color: rgb(0, 160, 233);width: 100%;}
+        /*a{display: block}*/
+        .icon{font-size: 25px;padding:0 10px;color:#FFFFFF;}
+        #container{top:45px;height: 100%;width:100%;}
+        #left, #right{overflow-y:scroll;}
         #left{background-color: #D5D5D5;height:100%;}
         #left li{padding:15px;}
         .active{background-color: gray;color:#fff;}
@@ -22,13 +24,13 @@
 @endsection
 
 @section('content')
-    "{{ session()->get('user.user_id') }}"
+    {{--"{{ session()->get('user.user_id') }}"--}}
     <div class="navbar">
-        <a href="/home/personal">{{ session()->get('user.wechat')['nickname'] }}<i class="icon icon-85"></i></a>
+        <a href="/home/personal"><i class="icon icon-85"></i></a>
     </div>
     <div id="container">
         <div id="left">
-            <ul>
+            <ul style="margin-bottom: 100px;">
                 @foreach($categorys as $category)
                     <li id="li_{{ $category->id }}">{{ $category->name }}</li>
                     {{--<li id="li_2">产品系列</li>--}}

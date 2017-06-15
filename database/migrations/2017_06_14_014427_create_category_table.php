@@ -16,7 +16,7 @@ class CreateCategoryTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->string('preview', 200);
-            $table->integer('category_no');
+            $table->integer('category_id');
             $table->integer('parent_id');
             $table->timestamps();
         });

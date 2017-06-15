@@ -1,33 +1,41 @@
 @extends('home.base')
-
+@section('title', "购物车")
 @section('m-css')
     <style type="text/css">
         img{width:90px;height: 90px;background-color: #0bb20c}
-        .weui_cells_checkbox .weui_check:checked+.weui_icon_checked:before{color:rgb(0, 160, 233)}
-        .weui_cells_title{border-bottom: 1px solid #ddd;}
+        .weui_cells_checkbox .weui_check:checked+.weui_icon_checked:before{color:rgb(0, 160, 233);}
+        .weui_cells{margin-top:0px;}
+        #nothing{text-align: center;padding-top: 50%;color:#d5d5d5;font-size: 21px;}
+        /*.weui_cells_title{border-bottom: 1px solid #ddd;padding-bottom: .77em;}*/
         p{color:gray}
     </style>
     @endsection
 
 @section('content')
-    <div class="weui_cells_title">购物车</div>
-    <div class="weui_cells weui_cells_checkbox">
-        @foreach($items as $item)
-            <label class="weui_cell weui_check_label" for="{{ $item['id'] }}">
-                <div class="weui_cell_hd">
-                    <input type="checkbox" name="product" value="{{ $item['id'] }}" class="weui_check"
-                           id="{{ $item['id'] }}">
-                    <i class="weui_icon_checked"></i>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>商品名称：{{ $item['name'] }}</p>
-                    <p>价格：{{ $item['price'] }}元</p>
-                    <p>数量：{{ $item['quantity'] }}</p>
-                    <img src="{{ $item['attributes']['preview'] }}"/>
-                </div>
-            </label>
-        @endforeach
-    </div>
+    {{--<div class="weui_cells_title">购物车</div>--}}
+    @if(count($items) != 0)
+        <h2>购物车商品</h2>
+        <div class="weui_cells weui_cells_checkbox">
+            @foreach($items as $item)
+                <label class="weui_cell weui_check_label" for="{{ $item['id'] }}">
+                    <div class="weui_cell_hd">
+                        <input type="checkbox" name="product" value="{{ $item['id'] }}" class="weui_check"
+                               id="{{ $item['id'] }}">
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>商品名称：{{ $item['name'] }}</p>
+                        <p>价格：{{ $item['price'] }}元</p>
+                        <p>数量：{{ $item['quantity'] }}</p>
+                        <img src="{{ $item['attributes']['preview'] }}"/>
+                    </div>
+                </label>
+            @endforeach
+        </div>
+    @else
+        <p id="nothing">购物车为空<br>请先添加商品到购物车</p>
+
+    @endif
     <div id="fix-btn">
         <a href="javascript:;" onclick="showDialog()">删除商品</a>|
         <a href="javascript:;" onclick="buy()">立即购买</a>

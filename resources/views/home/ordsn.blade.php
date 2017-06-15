@@ -1,9 +1,11 @@
 @extends('home.base')
-
+@section('title', '购物清单')
 @section('m-css')
     <style type="text/css">
         div, p, span{color:gray;}
         .weui_btn_primary{margin:20px 0;}
+        .weui_cells{margin-top:0px;}
+        /*.weui_cells_title{border-bottom: 1px solid #ddd;padding-bottom: .77em;}*/
     </style>
     @endsection
 <script src="/js/zepto.min.js"></script>
@@ -21,7 +23,8 @@
     });
 </script>
 @section('content')
-    <div class="weui_cells_title">购物清单</div>
+    {{--<div class="weui_cells_title">购物清单</div>--}}
+    <h2>购物清单</h2>
     <form id="mform" method="post" action="/service/order/commit">
         {{ csrf_field() }}
         <input value="{{ $ids }}" name="ids" hidden/>
