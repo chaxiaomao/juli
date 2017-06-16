@@ -10,7 +10,6 @@
         p{color:gray}
     </style>
     @endsection
-
 @section('content')
     {{--<div class="weui_cells_title">购物车</div>--}}
     @if(count($items) != 0)
@@ -34,7 +33,6 @@
         </div>
     @else
         <p id="nothing">购物车为空<br>请先添加商品到购物车</p>
-
     @endif
     <div id="fix-btn">
         <a href="javascript:;" onclick="showDialog()">删除商品</a>|

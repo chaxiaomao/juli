@@ -50,6 +50,6 @@ class orderController extends Controller
         $order->location = $location;
         $order->fast_shot = json_encode($items);
         $order->save();
-        return redirect('/home/wxpay?id=' . $order->id);
+        return redirect('/home/wxpay/' . $order->id);
     }
 }

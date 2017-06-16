@@ -1,7 +1,5 @@
 @extends('home.base')
-
 @section('title', '代理中心')
-
 @section('m-css')
     <style>
         .navbar, #container{position:fixed;}
@@ -14,15 +12,18 @@
         #left li{padding:15px;}
         .active{background-color: gray;color:#fff;}
         #right{background-color: #FFFFFF;height: 100%;position: absolute;right:0px;top:0px;}
-        #right li{border-bottom:1px solid #eee;padding:10px;position: relative}
-        #right li img:first-child{width:100px;height: 70px;background-color: #0bb20c}
-        #right li>span{position: absolute;padding-left: 5px;}
-        .pdt_price{bottom:30px;left:115px;color:red;}
-        .inp, #right li input{position: absolute;right: 10px;top:40px;width:30px;height: 30px;}
-        .inp{z-index: 99;}
+        /*#right li{border-bottom:1px solid #eee;padding:10px;position: relative}*/
+        /*#right li img:first-child{width:100px;height: 70px;background-color: #0bb20c}*/
+        /*#right li>span{position: absolute;padding-left: 5px;}*/
+        /*.pdt_price{bottom:30px;left:115px;color:red;}*/
+        /*.inp, #right li input{position: absolute;right: 10px;top:40px;width:30px;height: 30px;}*/
+        /*.inp{z-index: 99;}*/
+        .weui_cells_checkbox .weui_check:checked+.weui_icon_checked:before{color:rgb(0, 160, 233);}
+        .weui_cells_checkbox .weui_cell_hd{position: absolute;right: 10px;top:40%;}
+        .right_div{display: inline-block;position: relative;bottom:30px;}
+        .weui_cell_bd img{width: 100px;}
     </style>
 @endsection
-
 @section('content')
     {{--"{{ session()->get('user.user_id') }}"--}}
     <div class="navbar">
@@ -42,17 +43,35 @@
             </ul>
         </div>
         <div id="right">
-            <ul>
+            {{--<ul>--}}
+                {{--@foreach($products as $product)--}}
+                    {{--<li>--}}
+                        {{--<img id="preview_{{ $product->id }}" src="{{ $product->preview }}"/>--}}
+                        {{--<span id="name_{{ $product->id }}">{{ $product->name }}</span><br>--}}
+                        {{--<span id="price_{{ $product->id }}" class="pdt_price">{{ $product->price }}</span>--}}
+                        {{--<img class="inp" src="/images/choose.png" onclick="chooseItem(this, '{{ $product->id }}')"/>--}}
+                        {{--<input id="{{ $product->id }}" name="product" value="{{ $product->id }}" type="checkbox"/>--}}
+                    {{--</li>--}}
+                {{--@endforeach--}}
+            {{--</ul>--}}
+            <div class="weui_cells weui_cells_checkbox">
                 @foreach($products as $product)
-                    <li>
-                        <img id="preview_{{ $product->id }}" src="{{ $product->preview }}"/>
-                        <span id="name_{{ $product->id }}">{{ $product->name }}</span><br>
-                        <span id="price_{{ $product->id }}" class="pdt_price">{{ $product->price }}</span>
-                        <img class="inp" src="/images/choose.png" onclick="chooseItem(this, '{{ $product->id }}')"/>
-                        <input id="{{ $product->id }}" name="product" value="{{ $product->id }}" type="checkbox"/>
-                    </li>
+                    <label class="weui_cell weui_check_label" for="{{ $product->id }}">
+                        <div class="weui_cell_hd">
+                            <input type="checkbox" name="product" value="{{ $product->id }}" class="weui_check"
+                                   id="{{ $product->id }}">
+                            <i class="weui_icon_checked"></i>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <img id="preview_{{ $product->id }}" src="{{ $product->preview }}"/>
+                            <div class="right_div">
+                                <span id="name_{{ $product->id }}">{{ $product->name }}</span><br>
+                                <span id="price_{{ $product->id }}">{{ $product->price }}</span>
+                            </div>
+                        </div>
+                    </label>
                 @endforeach
-            </ul>
+            </div>
         </div>
     </div>
     <div id="fix-btn">
@@ -60,7 +79,6 @@
         <a href="/home/shoppingcar">前往结算</a>
     </div>
 @endsection
-
 @section('m-js')
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript">

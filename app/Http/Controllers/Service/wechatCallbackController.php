@@ -5,9 +5,9 @@ use App\Http\Controllers\Controller;
 use EasyWeChat\Foundation\Application;
 //use App\Entity\Member;
 
-class oauthController extends Controller
+class wechatCallbackController extends Controller
 {
-    public function callback()
+    public function oauthCallback()
     {
         $config = [
             'debug'     => true,
@@ -21,6 +21,11 @@ class oauthController extends Controller
         $user = $oauth->user();
         session()->put('user.wechat', $user->toArray());
         return back();
+    }
+
+    public function payCallback()
+    {
+
     }
 
 }
