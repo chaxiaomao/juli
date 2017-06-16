@@ -24,7 +24,7 @@ class wechatOauth
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],
                 //回调地址
-                'callback' => '/service/wechat/callback',
+                'callback' => '/service/wechat/oauth_callback',
             ],
         ];
         //使用配置初始化一个项目实例

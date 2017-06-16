@@ -25,7 +25,36 @@
         @endforeach
         <div class="weui-form-preview-ft">
             <a class="weui-form-preview-btn weui-form-preview-btn-default" href="javascript:history.go(-1)">返回上一页</a>
-            <button class="weui-form-preview-btn weui-form-preview-btn-primary" href="javascript:">立即支付</button>
+            <button class="weui-form-preview-btn weui-form-preview-btn-primary" onclick="wechatPayment()">立即支付</button>
         </div>
     </div>
+@endsection
+
+@section('m-js')
+    <script type="text/javascript">
+        var wechatPayment = function () {
+            if (typeof WeixinJSBridge === 'undefined') {
+                alert('请在微信在打开页面！');
+                return false;
+            }
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {!! $payconfig !!}, function (res) {
+                    switch (res.err_msg) {
+                        case 'get_brand_wcpay_request:cancel':
+                            alert('用户取消支付！');
+                            break;
+                        case 'get_brand_wcpay_request:fail':
+                            alert('支付失败！（' + res.err_desc + '）');
+                            break;
+                        case 'get_brand_wcpay_request:ok':
+                            alert('支付成功！');
+                            location.href = "/home/personal";
+                            break;
+                        default:
+                            alert(JSON.stringify(res));
+                            break;
+                    }
+                });
+        }
+    </script>
 @endsection

@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
-use App\Models\user;
+use App\Models\User;
 use Cart;
 use App\Tool\WxPay\Business;
 use App\Tool\WxPay\Payment;
-use App\Tool\WxPay\Order as wxOrder;
+use App\Tool\WxPay\Order as wechatOrder;
 use App\Tool\WxPay\UnifiedOrder;
 
 class indexController extends Controller
@@ -42,12 +42,14 @@ class indexController extends Controller
         }
         $ids = explode(',', $request->input('id', ''));
         $items = [];
+        $total = 0;
         for ($i = 0; $i < count($ids); $i++) {
             $items[$i] = Cart::get($ids[$i]);
+            $total += Cart::get($ids[$i])->getPriceSum();
         }
         return view('home.ordsn')->with('items', $items)
             ->with('ids', $request->input('id', ''))
-            ->with('total', Cart::getTotal());
+            ->with('total', $total);
     }
 
     public function getPersonal(Request $request)
@@ -62,16 +64,15 @@ class indexController extends Controller
         return view("home.personal")->with('user', $user);
     }
 
-    public function getWxpay(Request $request)
+    public function getWxpay(Request $request, $id)
     {
         $user = session()->get('user');
         if (!$user) {
             return '<script>alert("登陆过期，请重新登陆");location.href = "/home/login";</script>';
         }
-        $id = $request->input('id', '');
         $order = Order::find($id);
         $items = json_decode($order->fast_shot);
-        $total = '';
+        $total = 0;
         foreach ($items as $item) {
             $total += $item->price;
         }
@@ -81,15 +82,16 @@ class indexController extends Controller
             env('MERCHANT_ID'),
             env('MERCHANT_KEY')
         );
-//        $order = new Order();
-//        $order->body = 'grocery business';
-//        $order->out_trade_no = $ordsn;
-//        $order->total_fee = $total * 100;    // 单位为 “分”, 字符串类型
-//        $order->openid = $wechat_user['id'];
-//        $order->notify_url = url('service/wx_notify');
-//        $unifiedOrder = new UnifiedOrder($business, $order);
-//        $payment = new Payment($unifiedOrder);
+        $wxorder = new wechatOrder();
+        $wxorder->body = 'grocery business';
+        $wxorder->out_trade_no = $order->ordsn;
+        $wxorder->total_fee = $total * 100;    // 单位为 “分”, 字符串类型
+        $wxorder->openid = $user['wechat']['id'];
+        $wxorder->notify_url = url('/service/wechat/pay_callback');
+        $unifiedOrder = new UnifiedOrder($business, $wxorder);
+        $payment = new Payment($unifiedOrder);
         return view('home.wxpay')->with('items', $items)
-            ->with('total', $total);
+            ->with('total', $total)
+            ->with('payconfig', json_encode($payment));
     }
 }

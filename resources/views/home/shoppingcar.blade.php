@@ -4,17 +4,16 @@
     <style type="text/css">
         img{width:90px;height: 90px;background-color: #0bb20c}
         .weui_cells_checkbox .weui_check:checked+.weui_icon_checked:before{color:rgb(0, 160, 233);}
-        .weui_cells{margin-top:0px;}
+        .weui_cells{margin-top:0px;margin-bottom: 50px;}
         #nothing{text-align: center;padding-top: 50%;color:#d5d5d5;font-size: 21px;}
         /*.weui_cells_title{border-bottom: 1px solid #ddd;padding-bottom: .77em;}*/
         p{color:gray}
     </style>
     @endsection
-
 @section('content')
     {{--<div class="weui_cells_title">购物车</div>--}}
     @if(count($items) != 0)
-        <h2>购物车商品</h2>
+        <h2>选择结算</h2>
         <div class="weui_cells weui_cells_checkbox">
             @foreach($items as $item)
                 <label class="weui_cell weui_check_label" for="{{ $item['id'] }}">
@@ -34,7 +33,6 @@
         </div>
     @else
         <p id="nothing">购物车为空<br>请先添加商品到购物车</p>
-
     @endif
     <div id="fix-btn">
         <a href="javascript:;" onclick="showDialog()">删除商品</a>|
