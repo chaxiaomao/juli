@@ -2,6 +2,7 @@
 @section('title', "购物车")
 @section('m-css')
     <style type="text/css">
+        body{color:gray}
         img{width:90px;height: 90px;background-color: #0bb20c}
         .weui_cells_checkbox .weui_check:checked+.weui_icon_checked:before{color:rgb(0, 160, 233);}
         .weui_cells{margin-top:0px;margin-bottom: 50px;}

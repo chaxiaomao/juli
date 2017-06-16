@@ -1,5 +1,10 @@
 @extends('home.base')
-
+@section('m-css')
+    <style type="text/css">
+        body{color:gray;}
+        .weui-form-preview-bd{padding:0px; margin:10px 15px;border-bottom: 1px dashed #ddd;}
+    </style>
+@endsection
 @section('content')
     <h2>微信支付</h2>
     <div class="weui-form-preview">

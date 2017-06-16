@@ -30,4 +30,5 @@ Route::group(['prefix' => 'service', 'namespace' => 'Service'], function() {
     Route::any('wechat/pay_callback', 'wechatCallbackController@payCallback');
     Route::controllers(['cart' => 'cartController']);
     Route::controllers(['order' => 'orderController']);
+    Route::controllers(['address' => 'addressController']);
 });

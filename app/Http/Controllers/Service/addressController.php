@@ -3,15 +3,13 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use Cart;
+use App\Models\Address;
 
-class orderController extends Controller
+class addressController extends Controller
 {
     public function postCommit(Request $request)
     {
         $user = session()->get('user');
-        $ids = explode(',', $request->input('ids', ''));
         $receiver = $request->input('receiver', '');
         $tel = $request->input('tel', '');
         $city = $request->input('city', '');
@@ -36,23 +34,23 @@ class orderController extends Controller
             return '<script>alert("请填写收货地址");history.go(-1);</script>';
             exit;
         }
-        $items = [];
-        $total = 0;
-        for ($i = 0; $i < count($ids); $i++) {
-            $items[$i] = Cart::get($ids[$i]);
-            $total += Cart::get($ids[$i])->getPriceSum();
+        $address = Address::where('user_id', $user['user_id'])->first();
+        if (!$address) {
+            $addres = new Address();
+            $addres->receiver = $receiver;
+            $addres->tel = $tel;
+            $addres->city = $city;
+            $addres->location = $location;
+            $addres->default = 0;
+            $addres->save();
+        } else {
+            $address->update([
+                'receiver' => $receiver,
+                'tel' => $tel,
+                'city' => $city,
+                'location' => $location,
+            ]);
         }
-        $ordsn = "J" . date('Ymd') . time();//订单编号
-        $order = new Order();
-        $order->user_id = $user['user_id'];
-        $order->ordsn = $ordsn;
-        $order->total = $total;
-        $order->receiver = $receiver;
-        $order->tel = $tel;
-        $order->city = $city;
-        $order->location = $location;
-        $order->fast_shot = json_encode($items);
-        $order->save();
-        return redirect('/home/wxpay/' . $order->id);
+        return '<script>alert("保存成功");history.go(-1);</script>';
     }
 }

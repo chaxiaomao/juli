@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/style/weui.css"/>
     <link rel="stylesheet" href="/style/weui2.css"/>
     <link rel="stylesheet" href="/style/weui3.css"/>
-
 </head>
 @yield('m-css')
 <body>

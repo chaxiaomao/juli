@@ -2,7 +2,7 @@
 @section('title', '购物清单')
 @section('m-css')
     <style type="text/css">
-        div, p, span{color:gray;}
+        body{color:gray;}
         .weui_btn_primary{margin:20px 0;}
         .weui_cells{margin-top:0px;}
         /*.weui_cells_title{border-bottom: 1px solid #ddd;padding-bottom: .77em;}*/
@@ -32,19 +32,19 @@
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">收货人</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input id="receiver" name="receiver" class="weui_input" type="text" placeholder="收货人"/>
+                    <input id="receiver" name="receiver" class="weui_input" type="text" value="{{ $addres == null? '':$addres->receiver }}" placeholder="收货人"/>
                 </div>
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input id="tel" name="tel" class="weui_input" type="number" placeholder="手机号"/>
+                    <input id="tel" name="tel" class="weui_input" type="number" value="{{ $addres == null? '':$addres->tel }}" placeholder="手机号"/>
                 </div>
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label for="" class="weui_label">省市县:</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input name="city" class="weui_input" type="text" value="" id='ssx'/>
+                    <input name="city" class="weui_input" type="text" value="{{ $addres == null? '':$addres->city }}" id='ssx'/>
                 </div>
             </div>
             {{--<div class="weui_cell">--}}
@@ -56,7 +56,7 @@
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">收货地址</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input id="location" name="location" class="weui_input" type="text" placeholder="收货地址"/>
+                    <input id="location" name="location" class="weui_input" type="text" value="{{ $addres == null? '':$addres->location }}" placeholder="收货地址"/>
                 </div>
             </div>
             @foreach($items as $item)

@@ -26,13 +26,13 @@
         <i class="icon icon-27"></i>代理商城
     </a>
     <div class="weui_cells weui_cells_access">
-        <a class="weui_cell " href="javascript:;">
+        <a class="weui_cell " href="/home/orders">
             <div class="weui_cell_bd weui_cell_primary">
                 <p>我的订单</p>
             </div>
             <div class="weui_cell_ft">查看更多订单</div>
         </a>
-        <a class="weui_cell " href="javascript:;">
+        <a class="weui_cell " href="/home/address">
             <div class="weui_cell_bd weui_cell_primary">
                 <p>收货地址</p>
             </div>
