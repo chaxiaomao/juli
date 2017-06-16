@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
-use App\Models\user;
+use App\Models\User;
 use Cart;
 use App\Tool\WxPay\Business;
 use App\Tool\WxPay\Payment;
@@ -42,7 +42,7 @@ class indexController extends Controller
         }
         $ids = explode(',', $request->input('id', ''));
         $items = [];
-        $total = '';
+        $total = 0;
         for ($i = 0; $i < count($ids); $i++) {
             $items[$i] = Cart::get($ids[$i]);
             $total += Cart::get($ids[$i])->getPriceSum();
@@ -72,7 +72,7 @@ class indexController extends Controller
         }
         $order = Order::find($id);
         $items = json_decode($order->fast_shot);
-        $total = '';
+        $total = 0;
         foreach ($items as $item) {
             $total += $item->price;
         }
