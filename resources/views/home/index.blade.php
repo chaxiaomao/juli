@@ -4,9 +4,9 @@
 
 @section('m-css')
     <style>
+        body{color:gray;}
         .navbar, #container{position:fixed;}
         .navbar{text-align: right;height: 45px;line-height: 45px;background-color: rgb(0, 160, 233);width: 100%;}
-        /*a{display: block}*/
         .icon{font-size: 25px;padding:0 10px;color:#FFFFFF;}
         #container{top:45px;height: 100%;width:100%;}
         #left, #right{overflow-y:scroll;}
