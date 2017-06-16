@@ -24,7 +24,6 @@ Route::group(['middleware' => 'wechat.oauth'], function () {
     });
 });
 
-
 Route::group(['prefix' => 'service', 'namespace' => 'Service'], function() {
     Route::get('validate_code/create', 'validateCodeController@create');
     Route::any('wechat/oauth_callback', 'wechatCallbackController@oauthCallback');

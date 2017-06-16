@@ -42,12 +42,14 @@ class indexController extends Controller
         }
         $ids = explode(',', $request->input('id', ''));
         $items = [];
+        $total = '';
         for ($i = 0; $i < count($ids); $i++) {
             $items[$i] = Cart::get($ids[$i]);
+            $total += Cart::get($ids[$i])->getPriceSum();
         }
         return view('home.ordsn')->with('items', $items)
             ->with('ids', $request->input('id', ''))
-            ->with('total', Cart::getTotal());
+            ->with('total', $total);
     }
 
     public function getPersonal(Request $request)

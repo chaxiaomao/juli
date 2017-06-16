@@ -4,7 +4,7 @@
     <style type="text/css">
         img{width:90px;height: 90px;background-color: #0bb20c}
         .weui_cells_checkbox .weui_check:checked+.weui_icon_checked:before{color:rgb(0, 160, 233);}
-        .weui_cells{margin-top:0px;}
+        .weui_cells{margin-top:0px;margin-bottom: 50px;}
         #nothing{text-align: center;padding-top: 50%;color:#d5d5d5;font-size: 21px;}
         /*.weui_cells_title{border-bottom: 1px solid #ddd;padding-bottom: .77em;}*/
         p{color:gray}
