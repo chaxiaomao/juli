@@ -13,7 +13,7 @@
 @section('content')
     {{--<div class="weui_cells_title">购物车</div>--}}
     @if(count($items) != 0)
-        <h2>购物车商品</h2>
+        <h2>选择结算</h2>
         <div class="weui_cells weui_cells_checkbox">
             @foreach($items as $item)
                 <label class="weui_cell weui_check_label" for="{{ $item['id'] }}">
