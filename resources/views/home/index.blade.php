@@ -8,8 +8,8 @@
         .icon{font-size: 25px;padding:0 10px;color:#FFFFFF;}
         #container{top:45px;height: 100%;width:100%;}
         #left, #right{overflow-y:scroll;}
-        #left{background-color: #D5D5D5;height:100%;}
-        #left li{padding:15px;}
+        #left{background-color: #EEEEEE;height:100%;}
+        #left li{padding:15px;border-bottom:1px dashed gainsboro;}
         .active{background-color: gray;color:#fff;}
         #right{background-color: #FFFFFF;height: 100%;position: absolute;right:0px;top:0px;}
         /*#right li{border-bottom:1px solid #eee;padding:10px;position: relative}*/
@@ -28,13 +28,13 @@
 @section('content')
     {{--"{{ session()->get('user.user_id') }}"--}}
     <div class="navbar">
-        <a href="/home/personal"><i class="icon icon-85"></i></a>
+        <a href="/at/home/personal"><i class="icon icon-85"></i></a>
     </div>
     <div id="container">
         <div id="left">
             <ul style="margin-bottom: 100px;">
                 @foreach($categorys as $category)
-                    <li id="li_{{ $category->id }}">{{ $category->name }}</li>
+                    <li id="li_{{ $category->id }}" onclick="categoryClick('{{ $category->id }}')">{{ $category->name }}</li>
                     {{--<li id="li_2">产品系列</li>--}}
                     {{--<li id="li_3">产品系列</li>--}}
                     {{--<li id="li_4">产品系列</li>--}}
@@ -64,7 +64,7 @@
                             <i class="weui_icon_checked"></i>
                         </div>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <img id="preview_{{ $product->id }}" src="{{ $product->preview }}"/>
+                            <img id="preview_{{ $product->id }}" src="{{ $product->preview == null? '/images/pp.jpg' : $product->preview }}"/>
                             <div class="right_div">
                                 <span id="name_{{ $product->id }}">{{ $product->name }}</span><br>
                                 <span id="price_{{ $product->id }}">{{ $product->price }}</span>
@@ -77,7 +77,7 @@
     </div>
     <div id="fix-btn">
         <a href="javascript:;" onclick="productAdd()">加入购物车</a>|
-        <a href="/home/shoppingcar">前往结算</a>
+        <a href="/at/home/shoppingcar">前往结算</a>
     </div>
 @endsection
 @section('m-js')
@@ -92,16 +92,19 @@
             $("#right").attr("style", "width:" + r);
             $("#li_{!! $active !!}").addClass("active");
             //绑定li
-            for (var i = 0; i <= "{{ count($categorys) }}"; i++) {
-                $("#li_" + i).bind("click", {index: i}, clickHandler);
-            }
-            function clickHandler(event) {
-                var i = event.data.index;
-                $(".active").removeClass("active");
-                $("#li_" + i).addClass("active");
-                location.replace('/home/index?cid=' + i);
-            }
+            {{--for (var i = 0; i <= "{{ count($categorys) }}"; i++) {--}}
+                {{--$("#li_" + i).bind("click", {index: elm.slice(3)}, clickHandler);--}}
+            {{--}--}}
+            {{--function clickHandler(event) {--}}
+                {{--var i = event.data.index;--}}
+                {{--$(".active").removeClass("active");--}}
+                {{--$("#li_" + i).addClass("active");--}}
+                {{--location.replace('/at/home/index?cid=' + i);--}}
+            {{--}--}}
         });
+        function categoryClick(id) {
+            location.replace('/at/home/index?cid=' + id);
+        }
         function chooseItem(obj, id) {
             if ($("#" + id).attr("checked")) {
                 $(obj).attr("src", "/images/choose.png");

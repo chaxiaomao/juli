@@ -123,7 +123,7 @@
                 var id = $(this).val();
                 arr.push(new Array(id));
             });
-            location.href = '/home/ordsn?id=' + arr;
+            location.href = '/at/home/ordsn?id=' + arr;
         }
     </script>
 @endsection

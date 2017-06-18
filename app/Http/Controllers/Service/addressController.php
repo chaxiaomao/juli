@@ -34,10 +34,11 @@ class addressController extends Controller
             return '<script>alert("请填写收货地址");history.go(-1);</script>';
             exit;
         }
-        $address = Address::where('user_id', $user['user_id'])->first();
+        $address = Address::find($user['user_id']);
         if (!$address) {
             $addres = new Address();
             $addres->receiver = $receiver;
+            $addres->user_id = $user['user_id'];
             $addres->tel = $tel;
             $addres->city = $city;
             $addres->location = $location;

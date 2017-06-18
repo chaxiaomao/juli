@@ -3,6 +3,7 @@
 @section('m-css')
     <style type="text/css">
         body{color:gray;}
+        .weui_cells{margin-top: 0px;}
     </style>
 @endsection
 @section('content')

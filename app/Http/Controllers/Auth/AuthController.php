@@ -103,7 +103,7 @@ class AuthController extends Controller
             $user->ip = $request->ip();
             $user->save();
             session()->put('user.user_id', $user->id);
-            return redirect('/home/index');
+            return redirect('/at/home/index');
         }
 
     }
@@ -111,7 +111,7 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         if (session()->get('user.user_id')) {
-            return '<script>alert("你已经登录");location.href = "/home/index";</script>';
+            return '<script>alert("你已经登录");location.href = "/at/home/index";</script>';
         }
         //验证通过 登陆用户
         $data = $request->all();
@@ -136,7 +136,7 @@ class AuthController extends Controller
                     'ip' => $request->ip(),
                 ]);
                 session()->put('user.user_id', $user->id);
-                return redirect('/home/index');
+                return redirect('/at/home/index');
             } else {
                 echo '<script>alert("账号不存在");history.go(-1);</script>';
                 exit;

@@ -29,7 +29,7 @@
                 </p>
             </div>
             <div class="weui-form-preview-ft">
-                <a class="weui-form-preview-btn weui-form-preview-btn-primary" href="/home/order/{{ $order->id }}">查看详情</a>
+                <a class="weui-form-preview-btn weui-form-preview-btn-primary" href="/at/home/order/{{ $order->id }}">查看详情</a>
             </div>
         </div>
     @endforeach

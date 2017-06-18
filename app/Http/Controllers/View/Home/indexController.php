@@ -23,8 +23,8 @@ class indexController extends Controller
     public function getIndex(Request $request)
     {
         $category_id = $request->input('cid', 1);
-        $categorys = Category::all();
-        $products = Product::where('category_id', $category_id)->get();
+        $categorys = Category::where('status', 0)->get();
+        $products = Product::where(['category_id' => $category_id, 'status' => 0])->get();
         return view('home.index')->with('categorys', $categorys)
             ->with('products', $products)
             ->with('active', $category_id);
@@ -39,7 +39,7 @@ class indexController extends Controller
     public function getOrdsn(Request $request)
     {
         if (Cart::isEmpty()) {
-            return '<script>alert("还没加入购物车");location.href = "/home/index";</script>';
+            return '<script>alert("还没加入购物车");location.href = "/at/home/index";</script>';
         }
         $user = $request->session()->get('user');
         $ids = explode(',', $request->input('id', ''));

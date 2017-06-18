@@ -1,6 +1,5 @@
-body,html{height:100%;padding:0px;margin:0px;font-family: "微软雅黑" !important;}
+body,html{height:100%;padding:0px;margin:0px;font-family: "微软雅黑" !important;font-weight: bold;color:gray;}
 ul li{list-style: none;}
-
 
 .juli_toptips {display: none;position:fixed; position: absolute; bottom: 50px; text-align: center; width: 100%;z-index: 999;}
 .juli_toptips span {background: #444444; color: #ffffff; padding: 15px 15px; border-radius: 5px; opacity: 0.9;}

@@ -22,17 +22,17 @@
         <p>代理号：00001</p>
         <p>代理人昵称：{{ $user->username }}</p>
     </div>
-    <a class="bg2" href="/home">
+    <a class="bg2" href="/at/home">
         <i class="icon icon-27"></i>代理商城
     </a>
     <div class="weui_cells weui_cells_access">
-        <a class="weui_cell " href="/home/orders">
+        <a class="weui_cell " href="/at/home/orders">
             <div class="weui_cell_bd weui_cell_primary">
                 <p>我的订单</p>
             </div>
             <div class="weui_cell_ft">查看更多订单</div>
         </a>
-        <a class="weui_cell " href="/home/address">
+        <a class="weui_cell " href="/at/home/address">
             <div class="weui_cell_bd weui_cell_primary">
                 <p>收货地址</p>
             </div>
