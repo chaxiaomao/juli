@@ -102,6 +102,8 @@ class AuthController extends Controller
             $user->openid = $request->session()->get('user.wechat')['id'];
             $user->ip = $request->ip();
             $user->save();
+            $user->agent_id = $user->id;
+            $user->save();
             session()->put('user.user_id', $user->id);
             return redirect('/at/home/index');
         }

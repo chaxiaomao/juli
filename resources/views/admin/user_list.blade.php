@@ -2,8 +2,8 @@
 <div>
     <nav class="breadcrumb">
         <i class="Hui-iconfont">&#xe67f;</i> 首页
-        <span class="c-gray en">&gt;</span> 订单管理
-        <span class="c-gray en">&gt;</span> 所有订单
+        <span class="c-gray en">&gt;</span> 代理商管理
+        <span class="c-gray en">&gt;</span> 代理商列表
         <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
             <i class="Hui-iconfont">&#xe68f;</i>
         </a>
@@ -14,10 +14,10 @@
             -
             <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
             <input type="text" name="" id="" placeholder=" 产品名称" style="width:250px" class="input-text">
-            <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜订单</button>
+            <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜会员</button>
         </div>
         <div class="cl pd-5 bg-1 bk-gray mt-20">
-            <span class="r">共有数据：<strong>{{ count($orders) }}</strong> 条</span>
+            <span class="r">共有数据：<strong>{{ count($users) }}</strong> 条</span>
         </div>
         <div class="mt-20">
             <table class="table table-border table-bordered table-bg table-hover table-sort">
@@ -25,26 +25,26 @@
                 <tr class="text-c">
                     <th width="40"><input name="" type="checkbox" value=""></th>
                     <th width="40">ID</th>
-                    <th width="150">收货人</th>
-                    <th width="150">联系方式</th>
-                    <th width="150">城市</th>
-                    <th width="">详细地址</th>
-                    <th width="200">订单编号</th>
+                    <th width="200">昵称</th>
+                    <th width="150">手机号码</th>
+                    <th width="150">代理商ID</th>
+                    <th width="150">上次登录IP</th>
+                    <th width="">注册时间</th>
                     <th width="100">操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($orders as $order)
+                @foreach($users as $user)
                     <tr class="text-c va-m">
                         <td><input name="" type="checkbox" value=""></td>
-                        <td>{{ $order->id }}</td>
-                        <td>{{ $order->receiver }}</td>
-                        <td>{{ $order->tel }}</td>
-                        <td class="text-l">{{ $order->city }}</td>
-                        <td class="text-l">{{ $order->location }}</td>
-                        <td class="text-l">{{ $order->ordsn }}</td>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->username }}</td>
+                        <td>{{ $user->phone }}</td>
+                        <td>{{ $user->agent_id }}</td>
+                        <td>{{ $user->ip }}</td>
+                        <td>{{ $user->created_at }}</td>
                         <td class="td-manage">
-                            <a style="text-decoration:none" class="ml-5" onClick="order_edit('{{ $order->ordsn }}', '/at/admin/order/edit?id=' + '{{ $order->id }}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a style="text-decoration:none" class="ml-5" onClick="user_edit('{{ $user->name }}', '/at/admin/user/edit?id=' + '{{ $user->id }}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                             {{--<a style="text-decoration:none" class="ml-5" onClick="product_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>--}}
                         </td>
                     </tr>
@@ -225,7 +225,7 @@
         }
 
         /*产品-编辑*/
-        function order_edit(title, url, id){
+        function user_edit(title, url, id){
             var index = layer.open({
                 type: 2,
                 title: title,

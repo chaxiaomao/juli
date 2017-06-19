@@ -27,7 +27,7 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="product-list.html" data-title="代理商" href="javascript:void(0)">查看代理商</a></li>
+                        <li><a data-href="/at/admin/user/list" data-title="代理商" href="javascript:void(0)">查看代理商</a></li>
                     </ul>
                 </dd>
             </dl>
