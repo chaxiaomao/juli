@@ -20,7 +20,7 @@
         /*.inp{z-index: 99;}*/
         .weui_cells_checkbox .weui_check:checked+.weui_icon_checked:before{color:rgb(0, 160, 233);}
         .weui_cells_checkbox .weui_cell_hd{position: absolute;right: 10px;top:40%;}
-        .right_div{display: inline-block;position: relative;bottom:30px;}
+        /*.right_div{display: inline-block;position: relative;bottom:30px;}*/
         .weui_cell_bd img{width: 100px;}
         .weui_cells{margin-top: 0px;}
     </style>

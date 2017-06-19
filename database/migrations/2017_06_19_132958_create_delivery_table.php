@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePdtContentTable extends Migration
+class CreateDeliveryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreatePdtContentTable extends Migration
      */
     public function up()
     {
-        Schema::create('pdt_content', function($table){
+        Schema::create('delivery', function (Blueprint $table) {
             $table->increments('id');
-            $table->tinyinteger('product_id');
-            $table->string('content', 20000);
+            $table->integer('order_id');
+            $table->string('waybill', 50);
             $table->timestamps();
         });
     }

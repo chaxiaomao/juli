@@ -90,10 +90,6 @@ class indexController extends Controller
         $user = session()->get('user');
         $order = Order::find($id);
         $items = json_decode($order->fast_shot);
-//        $total = 0;
-//        foreach ($items as $item) {
-//            $total += $item->price;
-//        }
         $business = new Business(
             env('WECHAT_APPID'),
             env('WECHAT_SECRET'),

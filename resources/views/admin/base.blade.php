@@ -27,6 +27,7 @@
     <meta name="description" content="">
 </head>
 <body>
+@yield('m-style')
 @yield('frame')
 </body>
 <!--_footer 作为公共模版分离出去-->

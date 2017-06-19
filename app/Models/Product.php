@@ -13,4 +13,9 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category', 'category_id');
     }
+
+    public function content()
+    {
+        return $this->hasOne('App\Models\PdtContent', 'product_id');
+    }
 }

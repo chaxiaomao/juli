@@ -1,12 +1,21 @@
 @extends('admin.base')
-@section('m-link')
-    <link rel="stylesheet" href="/admin/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+{{--@section('m-link')--}}
+    {{--<link rel="stylesheet" href="/admin/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">--}}
+{{--@endsection--}}
+@section('m-style')
+    <style type="text/css">
+        .pos-a a:first-child{border-top: 1px solid #D5D5D5;}
+        .category{display: block;text-align: center;margin:0 20px 0 20px;border-bottom:1px solid #D5D5D5;height: 50px;line-height: 50px;}
+    </style>
 @endsection
-<div class="pos-a" style="width:200px;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5; overflow:auto;">
-    <ul id="treeDemo" class="ztree"></ul>
+<div class="pos-a"
+     style="width:200px;padding-top:40px;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5; overflow:auto;">
+    @foreach($categorys as $c)
+        <a class="category" onclick="product_list('{{ $c->name }}', '/at/admin/product/list?id=' + '{{ $c->category_id }}')">{{ $c->name }}</a>
+    @endforeach
 </div>
 <div style="margin-left:200px;">
-    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 产品列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 种类列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
     <div class="page-container">
         <div class="text-c"> 日期范围：
             <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
@@ -50,7 +59,7 @@
                             <a style="text-decoration:none" class="ml-5" onClick="category_edit('产品种类编辑','/at/admin/category/edit?id=' + '{{ $category->id }}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                             {{--<a style="text-decoration:none" class="ml-5" onClick="product_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>--}}
                         </td>
-                        <td><a href="javascript:;" class="btn btn-secondary-outline radius" onclick="product_list('{{ $category->name }}', '/at/admin/product/list?category_id=' + '{{ $category->category_id }}')">查看商品</a></td>
+                        <td><a href="javascript:;" class="btn btn-secondary-outline radius" onclick="product_list('{{ $category->name }}', '/at/admin/product/list?id=' + '{{ $category->category_id }}')">查看商品</a></td>
                     </tr>
                 @endforeach
                 </tbody>

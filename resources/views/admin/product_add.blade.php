@@ -48,7 +48,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">商品详情：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <script id="editor" type="text/plain" style="width:100%; height:400px;"></script>
+                <script id="editor" name="content" type="text/plain" style="width:100%; height:400px;"></script>
             </div>
         </div>
         {{--<div class="row cl">--}}

@@ -25,9 +25,11 @@ Route::group(['middleware' => 'wechat.oauth'], function () {
 });
 
 Route::group(['namespace' => 'View\Admin'], function () {
+    Route::controller('at/admin/order', 'orderController');
     Route::controller('at/admin/category', 'categoryController');
     Route::controller('at/admin/product', 'productController');
     Route::controller('at/admin', 'indexController');
+
 });
 
 Route::group(['prefix' => 'service', 'namespace' => 'Service'], function() {

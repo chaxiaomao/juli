@@ -37,7 +37,7 @@
                 <dd>
                     <ul>
                         {{--<li><a data-href="product-brand.html" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>--}}
-                        <li><a data-href="/at/admin/category/list" data-title="分类列表" href="javascript:void(0)">分类列表</a>
+                        <li><a data-href="/at/admin/category/list" data-title="分类列表" href="javascript:void(0)">种类列表</a>
                         </li>
                         <li><a data-href="/at/admin/product/list" data-title="商品列表" href="javascript:void(0)">商品列表</a></li>
                     </ul>
@@ -48,10 +48,10 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="product-brand.html" data-title="所有订单" href="javascript:void(0)">所有订单</a></li>
-                        <li><a data-href="product-category.html" data-title="待处理订单" href="javascript:void(0)">待处理订单</a>
+                        <li><a data-href="/at/admin/order/list" data-title="所有订单" href="javascript:void(0)">所有订单</a></li>
+                        <li><a data-href="/at/admin/order/undeal" data-title="待处理订单" href="javascript:void(0)">待处理订单</a>
                         </li>
-                        <li><a data-href="product-list.html" data-title="已处理订单" href="javascript:void(0)">已处理订单</a></li>
+                        <li><a data-href="/at/admin/order/deal" data-title="已处理订单" href="javascript:void(0)">已处理订单</a></li>
                     </ul>
                 </dd>
             </dl>

@@ -8,4 +8,9 @@ class Order extends Model
 {
     protected $table = 'order';
     protected $primaryKey = 'id';
+
+    public function delivery()
+    {
+        return $this->hasOne('App\Models\Delivery', 'order_id');
+    }
 }
