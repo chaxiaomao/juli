@@ -228,8 +228,8 @@
         function user_edit(title, url, id){
             var index = layer.open({
                 type: 2,
+                content: url,
                 title: title,
-                content: url
             });
             layer.full(index);
         }

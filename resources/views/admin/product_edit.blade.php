@@ -74,7 +74,7 @@
         var ue = UE.getEditor('editor');
         ue.execCommand( "getlocaldata" );
         ue.ready(function () {
-            ue.setContent('{!! $product->contetn == null? '' : $product->content->content !!}');
+            ue.setContent('{!! $product->content == null? '' : $product->content->content !!}');
         });
     </script>
 @endsection

@@ -106,6 +106,6 @@ class indexController extends Controller
         $payment = new Payment($unifiedOrder);
         return view('home.wxpay')->with('items', $items)
             ->with('total', $order->total)
-            ->with('payconfig', json_encode($payment));
+            ->with('payconfig', $payment->getConfig());
     }
 }

@@ -9,7 +9,7 @@
         #container{top:45px;height: 100%;width:100%;}
         #left, #right{overflow-y:scroll;}
         #left{background-color: #EEEEEE;height:100%;}
-        #left li{padding:15px;border-bottom:1px dashed gainsboro;}
+        #left li{padding:15px 5px;border-bottom:1px dashed gainsboro;text-align: center}
         .active{background-color: gray;color:#fff;}
         #right{background-color: #FFFFFF;height: 100%;position: absolute;right:0px;top:0px;}
         /*#right li{border-bottom:1px solid #eee;padding:10px;position: relative}*/
